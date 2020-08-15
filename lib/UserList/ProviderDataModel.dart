@@ -74,8 +74,8 @@ class ProviderData extends ChangeNotifier{
      }
     }
     catch (exception, stacktrace) {
-      print(exception);
-      print(stacktrace);
+     // print(exception);
+      //print(stacktrace);
     }
   }
 

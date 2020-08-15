@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:userlist/ProjectResource.dart';
 
+final globalScaffoldUserDetailsKey = GlobalKey<ScaffoldState>();
+
 class UserDetails extends StatefulWidget {
   dynamic userData;
   UserDetails({this.userData});
@@ -9,6 +11,17 @@ class UserDetails extends StatefulWidget {
 }
 
 class _UserDetailsState extends State<UserDetails> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  dispose(){
+    super.dispose();
+  }
+
 
   _getUserDetails(){
     var textStyle1 = TextStyle(fontWeight: FontWeight.bold, color: Colors.black);
@@ -73,11 +86,12 @@ class _UserDetailsState extends State<UserDetails> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     ProjectResource.setScreenSize(context);
-
     return Scaffold(
+      key: globalScaffoldUserDetailsKey,
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
         title: Title(child: Text("User Details"),color: Colors.white, ),

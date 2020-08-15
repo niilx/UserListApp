@@ -10,7 +10,10 @@ class ProjectResource{
 
   static BuildContext currentContext;
   static void setScreenSize(BuildContext context) {
-    currentContext = context;
+    if(ModalRoute.of(context).isCurrent) {
+      currentContext = context;
+    }
+
     screenWidth = MediaQuery.of(context).size.width;
     screenHeight = MediaQuery.of(context).size.height;
     screenHeight = screenWidth < screenHeight
@@ -22,9 +25,10 @@ class ProjectResource{
 
 
 
-  static showToast(String text, bool isError, String gravity) {
+  static showToast(String text, bool isError, String gravity,) {
     Color textColor = Colors.white;
     Color backColor = Colors.green;
+
     if (isError) {
       textColor = Colors.white;
       backColor = Colors.red;
@@ -39,8 +43,8 @@ class ProjectResource{
       Toast.show(text, currentContext,
         duration: Toast.LENGTH_LONG,
         gravity: Toast.CENTER,
-        backgroundColor: Colors.black54,
-        textColor: Colors.white,
+        backgroundColor: backColor,
+        textColor: textColor,
       );
     } else {
       Toast.show(text, currentContext,

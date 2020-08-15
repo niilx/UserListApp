@@ -10,6 +10,8 @@ import 'package:userlist/UserDetails/UserDetails.dart';
 import 'package:userlist/UserList/ProviderDataModel.dart';
 
 
+final globalScaffoldUserListKey = GlobalKey<ScaffoldState>();
+
 class UserList extends StatefulWidget {
   @override
   _UserListState createState() => _UserListState();
@@ -48,36 +50,39 @@ class _UserListState extends State<UserList> {
       }catch(e){ print(e);}
       try{ year = data.response[index]["year"]; }catch(e){ print(e);}
 
-      return InkWell(
-        onTap: (){
-          print(data.response[index]);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => UserDetails(userData: data.response[index],)));
-        },
-        child: Card(
-            color: Color(int.tryParse(_color)),
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text("Name: ",style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-                      Text(name,style: TextStyle(fontWeight: FontWeight.normal, color: Colors.white),),
-                    ],
-                  ),
-                  SizedBox(height: 5,),
-                  Row(
-                    children: <Widget>[
-                      Text("Year: ",style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
-                      Text(year.toString(),style: TextStyle(fontWeight: FontWeight.normal, color: Colors.white),),
-                    ],
-                  ),
-                  SizedBox(height: 5,),
-                ],
-              ),
-            )
+      return Material(
+        child: InkWell(
+          splashColor: Colors.red,
+          onTap: (){
+            print(data.response[index]);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => UserDetails(userData: data.response[index],))).then((value)=>setState(() {}));
+          },
+          child: Card(
+              color: Color(int.tryParse(_color)),
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text("Name: ",style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+                        Text(name,style: TextStyle(fontWeight: FontWeight.normal, color: Colors.white),),
+                      ],
+                    ),
+                    SizedBox(height: 5,),
+                    Row(
+                      children: <Widget>[
+                        Text("Year: ",style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+                        Text(year.toString(),style: TextStyle(fontWeight: FontWeight.normal, color: Colors.white),),
+                      ],
+                    ),
+                    SizedBox(height: 5,),
+                  ],
+                ),
+              )
+          ),
         ),
       );
     }
@@ -114,6 +119,7 @@ class _UserListState extends State<UserList> {
     ProjectResource.setScreenSize(context);
 
     return Scaffold(
+      key: globalScaffoldUserListKey,
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
         title: Title(child: Text("User List"),color: Colors.white, ),
@@ -129,6 +135,7 @@ class _UserListState extends State<UserList> {
       ),
       floatingActionButton: FloatingActionButton.extended(onPressed: (){
         combiner.getMoreDatas();
+
       }, label: Text("See more user")),
     );
   }
