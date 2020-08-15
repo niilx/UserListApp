@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 
 class ProjectResource{
+
   static String baseUrl = "https://reqres.in";
   static double screenWidth = 0;
   static double screenHeight = 0;

@@ -20,10 +20,15 @@ class UserList extends StatefulWidget {
 class _UserListState extends State<UserList> {
 
   var combiner;
+
   @override
   initState() {
      combiner = Provider.of<ProviderData>(context, listen: false);
+
+     //Checking internet connection
      combiner.checkInternetConnection();
+
+     //Getting users data
      combiner.getDatas();
 
     super.initState();
@@ -35,7 +40,7 @@ class _UserListState extends State<UserList> {
   }
 
 
-
+//Designing User List Data
   getUserList(){
 
     getItem(int index, var data){
@@ -88,7 +93,6 @@ class _UserListState extends State<UserList> {
     }
 
 
-
     return Consumer<ProviderData>(
       builder: (context,data,child){
         print("test");
@@ -136,7 +140,7 @@ class _UserListState extends State<UserList> {
       floatingActionButton: FloatingActionButton.extended(onPressed: (){
         combiner.getMoreDatas();
 
-      }, label: Text("See more user")),
+      }, label: Text("See more users")),
     );
   }
 

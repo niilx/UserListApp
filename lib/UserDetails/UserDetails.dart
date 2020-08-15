@@ -23,6 +23,7 @@ class _UserDetailsState extends State<UserDetails> {
   }
 
 
+  //Designing user details
   _getUserDetails(){
     var textStyle1 = TextStyle(fontWeight: FontWeight.bold, color: Colors.black);
     var textStyle2 = TextStyle(fontWeight: FontWeight.normal, color: Colors.black54);
